@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: nest-backend
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: mydb
+      NODE_ENV: production
+    depends_on:
+      - db
+    volumes:
+      # Montamos el código para desarrollo
+      - .:/app
+      # Evitamos sobrescribir node_modules dentro del contenedor
+      - /app/node_modules
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      # Volumen para persistencia de datos
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
