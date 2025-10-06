@@ -11,7 +11,7 @@ jobs:
     steps:
     -
       name: Checkout
-      uses: actions/ckeckout@v4
+      uses: actions/checkout@v4
     -
       name: Login to Docker hub
       uses: docker/login-action@v3
@@ -28,4 +28,4 @@ jobs:
         context: ./modulo4
         file: ./modulo4/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/modulo4-api:latests
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/modulo4-api:latest
