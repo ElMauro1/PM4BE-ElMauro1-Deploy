@@ -25,7 +25,7 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v5
       with:
-        context: .
-        file: ./Dockerfile
+        context: ./modulo4
+        file: ./modulo4/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/nest-demo:latests
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/modulo4-api:latests
